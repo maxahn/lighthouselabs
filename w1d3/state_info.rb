@@ -8,6 +8,16 @@
   MI: 'Michigan'
 }
 
+@taxrates = {
+  OH: 0.22,
+  WA: 0.15,
+  OR: 0.17,
+  FL: 0.10,
+  CA: 0.50,
+  NY: 0.14,
+  MI: 0.11
+}
+
 @cities = {
   OH: ['CityOH1','CityOH2','CityOH3'],
   WA: ['CityWA1','CityWA2'],
@@ -21,4 +31,10 @@ def describe_state (code)
   return "#{code} is for #{state}. It has #{numofcities}" + citiesnames
 end
 
-puts describe_state('GG')
+def calculate_tax(code, amount)
+  dollar = @taxrates[code.to_sym] == nil ? "nothing" : @taxrates[code.to_sym] * amount
+  return "The total tax is: #{dollar}"
+end
+
+puts describe_state('WA')
+puts calculate_tax('WA',15)
