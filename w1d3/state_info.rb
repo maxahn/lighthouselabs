@@ -1,11 +1,6 @@
 @states = {
-  OH: 'Ohio',
-  WA: 'Washington',
-  OR: 'Oregon',
-  FL: 'Florida',
-  CA: 'California',
-  NY: 'New York',
-  MI: 'Michigan'
+  OH: {:state => 'Ohio', :cities => ['CityOH1','CityOH2','CityOH3','CityWA2']},
+  WA: {:state => 'Washington', :cities => ['CityWA1','CityWA2']}
 }
 
 @taxrates = {
@@ -18,16 +13,11 @@
   MI: 0.11
 }
 
-@cities = {
-  OH: ['CityOH1','CityOH2','CityOH3','CityWA2'],
-  WA: ['CityWA1','CityWA2'],
-  OR: ['CityOR1','CityOR2']
-}
 
 def describe_state (code)
-  state = @states[code.to_sym] == nil ? "nothing" : @states[code.to_sym] #so you can enter invalid state
-  numofcities = @cities[code.to_sym] == nil ? "no cities" : "#{@cities[code.to_sym].length} cities: " #so you can enter state without cities
-  citiesnames = @cities[code.to_sym] == nil ? "" : @cities[code.to_sym].join(", ")
+  state = @states[code.to_sym][:state] == nil ? "nothing" : @states[code.to_sym][:state] #so you can enter invalid state
+  numofcities = @states[code.to_sym][:cities] == nil ? "no cities" : "#{@states[code.to_sym][:cities].length} cities: " #so you can enter state without cities
+  citiesnames = @states[code.to_sym][:cities] == nil ? "" : @states[code.to_sym][:cities].join(", ")
   return "#{code} is for #{state}. It has #{numofcities}" + citiesnames
 end
 
@@ -37,9 +27,10 @@ def calculate_tax(code, amount)
 end
 
 def find_state(city)
-  return @cities.select{|k, v| v.include?(city)}.keys #this will return all states with city name, even if 2 states have the same city names
+  result = @states.select { |state_key, state_info| state_info[:cities].include?(city)}
+  result.keys
 end
 
-puts describe_state('WA')
-puts calculate_tax('WA',15)
+puts describe_state('OH')
+puts calculate_tax('OH',15)
 puts find_state('CityWA2')
