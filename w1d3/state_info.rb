@@ -19,7 +19,7 @@
 }
 
 @cities = {
-  OH: ['CityOH1','CityOH2','CityOH3'],
+  OH: ['CityOH1','CityOH2','CityOH3','CityWA2'],
   WA: ['CityWA1','CityWA2'],
   OR: ['CityOR1','CityOR2']
 }
@@ -36,5 +36,10 @@ def calculate_tax(code, amount)
   return "The total tax is: #{dollar}"
 end
 
+def find_state(city)
+  return @cities.select{|k, v| v.include?(city)}.keys #this will return all states with city name, even if 2 states have the same city names
+end
+
 puts describe_state('WA')
 puts calculate_tax('WA',15)
+puts find_state('CityWA2')
