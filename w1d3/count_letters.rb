@@ -6,7 +6,8 @@
 
 def count_letters_each(string) # #each version
   count = Hash.new
-  splited_string = string.delete(' ').split("") # delete(' ') remove whitespaces
+  splited_string = string.split("")
+  splited_string.delete(' ') # delete(' ') remove whitespaces
   splited_string.each do |n|
     count[n] = string.count(n)
   end
@@ -15,8 +16,8 @@ end
 
 def count_letters_inject(string) # #inject version
   splited_string = string.delete(' ').split("")
-  splited_string.inject(Hash.new(0)) do |result, count|
-    result[count] += 1
+  splited_string.inject(Hash.new(0)) do |result, letter| # inject(Hash.new(0)) does two things, it sets the default value for "result" to Hash.new, and it sets default value for "count" as 0.
+    result[letter] += 1
     result
   end
 end
