@@ -52,6 +52,7 @@ def to_roman3(num)
   result = ""
   @roman_mapping.each do |pair|
     value = pair[0]
+    binding.pry
     roman = pair[1]
     level_occurance = num / value
     level_occurance.times do |x|

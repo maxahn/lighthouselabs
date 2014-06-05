@@ -13,19 +13,19 @@ end
 
 
 def experienced?(x)
- x[:years_of_experience] > 2
+ x[:years_of_experience] >= 2
 end
 
-def hundredpoints?
-  x[:github_points] > 100
+def hundredpoints?(x)
+  x[:github_points] >= 100
 end
 
 def ruby_or_python?(x)
-  x[:languages].include?("Ruby" || "Python")
+  x[:languages].include?("Python") || x[:languages].include?("Ruby")
 end
 
 def last_15_days?(x)
-  x[:date_applied] > 15.days.ago.to_date
+  x[:date_applied] >= 15.days.ago.to_date
 end
 
 def over_17?(x)
