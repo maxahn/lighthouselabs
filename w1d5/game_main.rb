@@ -27,7 +27,7 @@ while @player_life[player] != 0
   answer = gets.chomp.to_i
 
   # Verify answer
-  if verify_answer(answer)
+  if verify_answer?(answer)
     @player_points[player] += 1
     puts "You got it! You now have #{@player_points[player]} points.".green
   else
