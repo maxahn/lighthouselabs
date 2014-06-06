@@ -1,9 +1,9 @@
 # Determine whether a string contains a SIN (Social Insurance Number).
 # A SIN is 9 digits and we are assuming that they must have dashes in them
 def has_sin?(string)
-  true_false = /\b\d{3}\-\d{3}\-\d{3}\b/ !~ string
+  true_false = /\b\d{3}\-\d{3}\-\d{3}\b/ =~ string
   # true_false = /share/ !~ string
-  true_false ^= true #reverse true/false
+  true_false.is_a? Fixnum
 end
  
 puts "has_sin? returns true if it has what looks like a SIN"
@@ -37,6 +37,8 @@ puts grab_sin("please confirm your identity: XXX-XXX-142") == nil
 def grab_all_sins(string)
   string.scan(/\b\d{3}\-\d{3}\-\d{3}\b/)
 end
+
+
  
 puts "grab_all_sins returns all SINs if the string has any SINs"
 puts grab_all_sins("234-604-142, 350-802-074, 013-630-876") == ["234-604-142", "350-802-074", "013-630-876"]
@@ -61,29 +63,43 @@ puts hide_all_sins(string) == string
 # Ensure all of the Social Insurance numbers use dashes for delimiters.
 # Example: 480.01.4430 and 480014430 would both be 480-01-4430.
 
-## The following is a really ugly solution, but a solution non the less.
+
 def format_sins(string)
   #\b\d{3}[^-]?\d{3}[^-]?\d{3}\b
-  true_false = /\b\d{3}.?\d{3}.?\d{3}\b/ !~ string
-  true_false ^= true #reverse true/false
+  true_false = /\b\d{3}.?\d{3}.?\d{3}\b/ =~ string
+  true_false.is_a? Fixnum
   if true_false
-    result = ""
+
+    sin_array = []
     sin_string = string.scan(/\b\d{3}.?\d{3}.?\d{3}\b/)
     sin_string.each do |sin|
-      sin = sin.gsub(/[^0-9]/, "")
-      sin = sin.insert(3, '-').insert(7, '-').insert(11, ', ')
-      result += sin
+      sin_array << sin.scan(/\d{3}/)
     end
-    result.chop.chop
+    sin_array.map! {|x| x.join("-")}.join(", ").to_s
+
+    ## The following is a really ugly solution, but a solution non the less.
+    # result = ""
+    # sin_string = string.scan(/\b\d{3}.?\d{3}.?\d{3}\b/)
+    # sin_string.each do |sin|
+    #   sin = sin.gsub(/[^0-9]/, "")
+    #   sin = sin.insert(3, '-').insert(7, '-').insert(11, ', ')
+    #   result += sin
+    # end
+    # result.chop.chop
+
+
   else
     string
   end
+
+
 end
 
 
 
+
 puts "format_sins finds and reformat any SINs in the string"
-puts format_sins("234600142, 350.800.074, 013-600-876") == "234-600-142, 350-800-074, 013-600-876"
+puts format_sins("234600142, 350.800.074, 013-600-876 123345456") == "234-600-142, 350-800-074, 013-600-876, 123-345-456"
  
 puts "format_sins does not alter a string without SINs in it"
 string = "please confirm your identity: 4421422"
