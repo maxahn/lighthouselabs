@@ -4,8 +4,6 @@ require 'colorize'
 # set default player to second player, since it gets swapped back to first player at beginning for while loop
 player = 1
 
-# set question variable to array
-question = []
 
 # Enter player names
 puts "Welcome to math buster"
@@ -15,7 +13,7 @@ puts "Player 2, please enter your name: "
 @player_name[1] = gets.chomp
 puts "Alright #{@player_name[0]} & #{@player_name[1]}, get ready for Math Buster!"
 
-
+# Game runs while player life is NOT 0
 while @player_life[player] != 0
 
   # now swap player
@@ -28,6 +26,7 @@ while @player_life[player] != 0
   puts @question
   answer = gets.chomp.to_i
 
+  # Verify answer
   if verify_answer(answer)
     @player_points[player] += 1
     puts "You got it! You now have #{@player_points[player]} points.".green
@@ -36,11 +35,10 @@ while @player_life[player] != 0
     puts "WRONG! You have #{@player_life[player]} lives left.".red
   end
 
+  #Ask if player wants to play again
   if @player_life[player] == 0
     puts "#{@player_name[player]} you lose!".red
-    player = 1
     ask = play_again?
-    break if ask == false
   end
 end
 
