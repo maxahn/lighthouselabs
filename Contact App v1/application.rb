@@ -28,7 +28,9 @@ class Application
       list_contacts
       run
     when 'show'
-      show_detail
+      puts "Enter ID: "
+      n = gets.chomp.to_i
+      show_detail(n)
       run  
     when 'quit'
       puts "Goodbye"
@@ -57,6 +59,10 @@ class Application
   end
 
   # show contact detail by ID
-  def show
+  def show_detail(n)
+    puts "Here's the detail for contact ID #{n}"
+    puts "Name: #{Contact.find(n)[0]}"
+    puts "Email: #{Contact.find(n)[1]}"
+  end
 
 end
