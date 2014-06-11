@@ -13,6 +13,7 @@ class Application
     puts "Welcome to the app. What's next?"
     puts " new      - Create a new contact"
     puts " list     - List all contacts"
+    puts " show     - Enter ID to show detail of a contact"
     puts " quit     - Exit Application"
     print "> "
   end
@@ -24,7 +25,11 @@ class Application
       new_contact
       run
     when 'list'
+      list_contacts
       run
+    when 'show'
+      show_detail
+      run  
     when 'quit'
       puts "Goodbye"
     else 
@@ -42,10 +47,16 @@ class Application
     Contact.create(name, email)
   end
 
-  #
+  # list all contacts
   def list_contacts
+    
+    length = Contact.all.length
+    for n in 0...length
+      puts "#{n}: (#{Contact.find(n)[0]}) "
+    end
+  end
 
-    for n in 1...length
-      puts n + ": (#{Contact.find(n)})"
+  # show contact detail by ID
+  def show
 
 end

@@ -15,7 +15,7 @@ def generate_question
 end
 
 
-def verify_answer(answer)
+def verify_answer?(answer)
   @answer == answer  
 end
 

@@ -15,7 +15,7 @@ class Barracks
 
 
   def damage(power)
-    @health_points = ( health_points - power)
+    @health_points = ( health_points - power )
   end
 
   def train_footman

@@ -4,5 +4,10 @@ class SeigeEngine < Unit
     @attack_power = 50
   end
 
+  def should_attack?
+    
+  end
+
+  
 
 end

@@ -14,7 +14,7 @@ class Contact
 
 
 
-  def to_s(input)
+  def to_string(input)
     input.join(", ")
   end
 
