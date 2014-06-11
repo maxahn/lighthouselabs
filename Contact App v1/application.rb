@@ -48,11 +48,16 @@ class Application
 
   #create new contact
   def new_contact
-    puts "Enter full name: "
-    name = gets.chomp
+
     puts "Enter email address: "
     email = gets.chomp
-    Contact.create(name, email)
+    if Contact.valid_email?(email) == true
+      puts "Enter full name: "
+      name = gets.chomp
+      Contact.create(name, email)
+    else
+      new_contact
+    end
   end
 
   # list all contacts
@@ -74,15 +79,15 @@ class Application
   # find contact by searching name
   def find_contact(input)
     # binding.pry
-    list = []
+    index_result = []
     matches = Contact.all.each_with_index do |one_contact, index|
       if one_contact[0].to_s =~ /#{Regexp.quote(input)}/i 
-              list << index
+              index_result << index
       end
     end
     puts "Here's a list of contacts matching your search: "
     puts "================================"
-    list.each do |index|
+    index_result.each do |index|
       puts "Name: #{Contact.find(index)[0]}"
       puts "Email: #{Contact.find(index)[1]}"
       puts "================================"
