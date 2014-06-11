@@ -74,11 +74,15 @@ class Application
   # find contact by searching name
   def find_contact(input)
     # binding.pry
-    matches = Contact.all.each_with_index.select { |name, index| name[0].to_s =~ /#{Regexp.quote(input)}/i }
-    matches.map! {|match| match[1]}
+    list = []
+    matches = Contact.all.each_with_index do |one_contact, index|
+      if one_contact[0].to_s =~ /#{Regexp.quote(input)}/i 
+              list << index
+      end
+    end
     puts "Here's a list of contacts matching your search: "
     puts "================================"
-    matches.each do |index|
+    list.each do |index|
       puts "Name: #{Contact.find(index)[0]}"
       puts "Email: #{Contact.find(index)[1]}"
       puts "================================"
