@@ -1,7 +1,7 @@
 class Contact
 
   ## In-memory list of contacts
-  @@contacts = [["Alan", "alan@gmail.com"], ["BOB", "bob@gmail.com"]]
+  @@contacts = [["Alan Hsu", "alan@gmail.com"], ["BOB Kent", "bob@gmail.com"], ["Alan Keall", "kalan@gmail.com"]]
 
   attr_accessor :name
   attr_accessor :email
