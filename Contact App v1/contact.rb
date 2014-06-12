@@ -1,7 +1,7 @@
 class Contact
 
   ## In-memory list of contacts
-  @@contacts = [["Alan Hsu", "alan@gmail.com"], ["BOB Kent", "bob@gmail.com"], ["Alan Keall", "kalan@gmail.com"]]
+  @@contacts = [["Alan Hsu", "alan@gmail.com", {mobile: '604-777-8888', home: '604-555-6666'}], ["BOB Kent", "bob@gmail.com"], ["Alan Keall", "kalan@gmail.com"]]
 
   attr_accessor :name
   attr_accessor :email
@@ -49,6 +49,10 @@ class Contact
       # Add new contact into @@contacts
       @@contacts << [name, email]
 
+    end
+
+    def add_phone(id, label, number)
+      @@contacts[id][2][label.to_sym] = number
     end
 
     def find(index)

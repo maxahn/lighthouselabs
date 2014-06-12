@@ -15,6 +15,7 @@ class Application
     puts " list     - List all contacts"
     puts " show     - Enter ID to show detail of a contact"
     puts " find     - Find contacts by name"
+    puts " add num  - Add phone numbers"
     puts " quit     - Exit Application"
     print "> "
   end
@@ -37,6 +38,15 @@ class Application
       puts "Enter search term: "
       name = gets.chomp
       find_contact(name)
+      run
+    when 'add num'
+      puts "Enter contact ID: "
+      id = gets.chomp.to_i
+      puts "Enter Label: "
+      label = gets.chomp
+      puts "Enter Phone Number: "
+      number = gets.chomp
+      Contact.add_phone(id, label, number)
       run
     when 'quit'
       puts "Goodbye"
@@ -74,6 +84,8 @@ class Application
     puts "Here's the detail for contact ID #{n}"
     puts "Name: #{Contact.find(n)[0]}"
     puts "Email: #{Contact.find(n)[1]}"
+    puts Contact.find(n)[2].to_yaml
+    puts "----------------------------"
   end
 
   # find contact by searching name
