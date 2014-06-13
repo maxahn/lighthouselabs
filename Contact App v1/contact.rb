@@ -1,22 +1,27 @@
 class Contact
 
   ## In-memory list of contacts
-  @@contacts = [["Alan Hsu", "alan@gmail.com", {mobile: '604-777-8888', home: '604-555-6666'}], ["BOB Kent", "bob@gmail.com"], ["Alan Keall", "kalan@gmail.com"]]
-
+  @@contacts = []
   attr_accessor :name
   attr_accessor :email
+  attr_accessor :phone_hash
 
-  def initialize(name, email)
+  def initialize(name, email, phone_hash)
     # TODO: assign local variables to instance variables
     @name = name
     @email = email
+    @phone_hash = phone_hash
   end
 
+  def store
+    Contact.create(self.name, self.email, self.phone_hash)
+  end
 
-
-  # def to_string(input)
-  #   input.join(", ")
-  # end
+  def to_s
+    puts "Name: #{Contact.name}"
+    puts "Email: #{Contact.email}"
+    puts Contact.phone_hash.to_yaml
+  end
 
 
 
@@ -27,7 +32,7 @@ class Contact
       # does email exist?
       already_exist = []
       Contact.all.each do |one_contact|
-        already_exist << (one_contact[1].to_s =~ /^#{Regexp.quote(email)}$/i)
+        already_exist << (one_contact.email.to_s =~ /^#{Regexp.quote(email)}$/i)
       end
       already_exist = already_exist.any? {|i| i.is_a? Fixnum }
       
@@ -43,16 +48,13 @@ class Contact
       end
     end
 
-    def create(name, email)
+    def create(name, email, phone_hash)
       # TODO: Will initialize a contact as well as add it to the list of contacts
-
-      # Add new contact into @@contacts
-      @@contacts << [name, email]
-
+      @@contacts << Contact.new(name, email, phone_hash)
     end
 
     def add_phone(id, label, number)
-      @@contacts[id][2][label.to_sym] = number
+      @@contacts[id].phone_hash[label.to_sym] = number
     end
 
     def find(index)

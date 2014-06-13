@@ -22,7 +22,7 @@ class Barracks
     @gold -= 135
     @food -= 2
     if can_train_footman?
-      footman = Footman.new
+      Footman.new
     else
       return nil
     end

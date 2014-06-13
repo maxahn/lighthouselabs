@@ -15,7 +15,7 @@ class Application
     puts " list     - List all contacts"
     puts " show     - Enter ID to show detail of a contact"
     puts " find     - Find contacts by name"
-    puts " add num  - Add phone numbers"
+    puts " add      - Add phone numbers"
     puts " quit     - Exit Application"
     print "> "
   end
@@ -39,7 +39,7 @@ class Application
       name = gets.chomp
       find_contact(name)
       run
-    when 'add num'
+    when 'add'
       puts "Enter contact ID: "
       id = gets.chomp.to_i
       puts "Enter Label: "
@@ -49,6 +49,7 @@ class Application
       Contact.add_phone(id, label, number)
       run
     when 'quit'
+      save_contact
       puts "Goodbye"
     else 
       puts "unknown command"
@@ -64,7 +65,7 @@ class Application
     if Contact.valid_email?(email) == true
       puts "Enter full name: "
       name = gets.chomp
-      Contact.create(name, email)
+      Contact.create(name, email, {})
     else
       new_contact
     end
@@ -75,17 +76,18 @@ class Application
     
     length = Contact.all.length
     for n in 0...length
-      puts "#{n}: (#{Contact.find(n)[0]}) "
+      puts "#{n}: (#{Contact.find(n).name}) "
     end
   end
 
   # show contact detail by ID
   def show_detail(n)
     puts "Here's the detail for contact ID #{n}"
-    puts "Name: #{Contact.find(n)[0]}"
-    puts "Email: #{Contact.find(n)[1]}"
-    puts Contact.find(n)[2].to_yaml
-    puts "----------------------------"
+    puts "================================"
+    puts "Name: #{Contact.find(n).name}"
+    puts "Email: #{Contact.find(n).email}"
+    puts Contact.find(n).phone_hash.to_yaml
+    puts "================================"
   end
 
   # find contact by searching name
@@ -93,17 +95,32 @@ class Application
     # binding.pry
     index_result = []
     matches = Contact.all.each_with_index do |one_contact, index|
-      if one_contact[0].to_s =~ /#{Regexp.quote(input)}/i 
+      if one_contact.name.to_s =~ /#{Regexp.quote(input)}/i 
               index_result << index
       end
     end
     puts "Here's a list of contacts matching your search: "
     puts "================================"
     index_result.each do |index|
-      puts "Name: #{Contact.find(index)[0]}"
-      puts "Email: #{Contact.find(index)[1]}"
+      puts "Name: #{Contact.find(index).name}"
+      puts "Email: #{Contact.find(index).email}"
+      puts Contact.find(n).phone_hash.to_yaml
       puts "================================"
     end
   end
 
+  def save_contact
+    array = []
+
+    length = Contact.all.length
+    for n in 0...length
+      array << [Contact.find(n).name, Contact.find(n).email, Contact.find(n).phone_hash]
+    end
+
+    CSV.open('./phonebook.csv', 'w') do |csv_object|
+      array.each do |row_array|
+        csv_object << row_array
+      end
+    end
+  end
 end
