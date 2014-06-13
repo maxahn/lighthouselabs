@@ -10,13 +10,14 @@ class Application
 
   # Prints the main menu only
   def show_main_menu
-    puts "Welcome to the app. What's next?"
+    puts "Welcome to Contacts APP, What's next?"
     puts " new      - Create a new contact"
     puts " list     - List all contacts"
     puts " show     - Enter ID to show detail of a contact"
     puts " find     - Find contacts by name"
     puts " add      - Add phone numbers"
-    puts " quit     - Exit Application"
+    puts " save     - Save contact to CSV file"
+    puts " quit     - Save & Exit Application"
     print "> "
   end
 
@@ -48,6 +49,8 @@ class Application
       number = gets.chomp
       Contact.add_phone(id, label, number)
       run
+    when 'save'
+      save_contact
     when 'quit'
       save_contact
       puts "Goodbye"
