@@ -29,6 +29,8 @@ require_relative 'application'
 
 # array[:sym] << "22"
 
+
+
 CSV.foreach('./phonebook.csv') do |row_array|
   if row_array[2] == "{}"
     phone_hash = {}

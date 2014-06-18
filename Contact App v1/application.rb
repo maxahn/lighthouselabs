@@ -51,6 +51,7 @@ class Application
       run
     when 'save'
       save_contact
+      run
     when 'quit'
       save_contact
       puts "Goodbye"
@@ -91,6 +92,7 @@ class Application
     puts "Email: #{Contact.find(n).email}"
     puts Contact.find(n).phone_hash.to_yaml
     puts "================================"
+    raise "error"
   end
 
   # find contact by searching name
@@ -107,7 +109,7 @@ class Application
     index_result.each do |index|
       puts "Name: #{Contact.find(index).name}"
       puts "Email: #{Contact.find(index).email}"
-      puts Contact.find(n).phone_hash.to_yaml
+      puts Contact.find(input.to_i).phone_hash.to_yaml
       puts "================================"
     end
   end
