@@ -3,7 +3,9 @@ class Student < ActiveRecord::Base
 
   validates :email, uniqueness: true, :email_format => {:message => 'is not looking good'}
   validate :at_least_3
-  belongs_to :teacher
+  
+  has_many :classrooms
+  has_many :teachers, :through => :classrooms
 
   def name
     first_name + " " + last_name
@@ -21,9 +23,9 @@ class Student < ActiveRecord::Base
     end
   end
 
+
+
   # def self.distribute
-  #   total_teachers = Teacher.count
-  #   count = 1
   #   Student.all.each do |student|
   #     if count > total_teachers
   #       count = 1
