@@ -68,7 +68,7 @@ class Application
         id = gets.chomp.to_i
 
         if id_error_rescue(id) == false
-          puts Contact.find(id).attributes
+          puts Contact.find(id).inspect
         end
         
         t = Contact.find(id)
@@ -158,7 +158,7 @@ class Application
 
   def list_contact
     Contact.all.order(:id).each do |x|
-      puts x.attributes
+      puts x.inspect
     end
   end
 
@@ -166,7 +166,7 @@ class Application
     puts "Enter ID: "
     id = gets.chomp.to_i
     if id_error_rescue(id) == false
-      puts Contact.find(id).attributes
+      puts Contact.find(id).inspect
     end
   end
   # list all contacts

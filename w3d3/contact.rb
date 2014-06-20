@@ -7,6 +7,9 @@ class Contact < ActiveRecord::Base
   @@contacts_in_memory = []
   cattr_accessor :contacts_in_memory
 
+  validates :firstname, presence: true
+  validates :lastname, presence: true
+  validates :email, presence: true
 
 ## Class Methods
   class << self
