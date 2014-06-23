@@ -1,7 +1,9 @@
 module LightBrow
   class Browser
 
-
+    def initialize
+      @home = 2
+    end
 
 
 
@@ -76,7 +78,7 @@ COMMANDS:
 
 
     def history
-
+      puts @home
       History.order(:created_at).each do |url|
         puts url[:url].inspect.white.on_red.blink
       end
