@@ -1,0 +1,11 @@
+# A sample Gemfile
+source "https://rubygems.org"
+
+gem 'rspec'
+gem 'sqlite3'
+gem 'rake'
+gem 'activerecord', require: 'active_record'
+gem 'nokogiri'
+gem 'colorize'
+gem 'pry'
+gem 'pry-nav'
