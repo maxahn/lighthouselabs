@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624013248) do
+ActiveRecord::Schema.define(version: 20140624195658) do
+
+  create_table "reviews", force: true do |t|
+    t.text     "review"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "track_id"
+    t.integer  "user_id"
+  end
 
   create_table "tracks", force: true do |t|
     t.string   "title"

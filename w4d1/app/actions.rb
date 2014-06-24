@@ -58,6 +58,7 @@ end
 
 get '/tracks/:id' do
   @track = Track.find params[:id]
+  @reviews = Review.where(:track_id => @track.id)
   erb :'tracks/show'
 end
 
@@ -86,6 +87,24 @@ post '/votes' do
     "you already voted"
   end
 end
+
+post '/reviews' do
+  @review = Review.new(
+    review: params[:review],
+    track_id: params[:track_id],
+    user_id: request.cookies['user_id']
+  )
+  if @review.save
+    redirect "/tracks/#{params[:track_id]}"
+  else
+    "you already reviewed this song"
+  end
+end
+
+post '/deletereview' do
+
+end
+
 
 post '/login' do
   if User.where(:username => params['username']).pluck(:password)[0] == params['password']
