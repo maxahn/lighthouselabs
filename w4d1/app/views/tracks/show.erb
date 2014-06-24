@@ -9,7 +9,10 @@
 </p>
 
 <p>
-  <%= @track.user_id  %>
+  Submitted by user: <%= User.find(@track.user_id)[:username] %>
+</p>
+<p>
+  Total Votes: <%= Vote.where(track_id: @track.id).count %>
 </p>
 
 <hr/>

@@ -55,7 +55,19 @@ post '/tracks' do
     redirect '/tracks'
   else
     erb :'tracks/new'
+  end
+end
 
+post '/votes' do
+  @vote = Vote.new(
+    track_id: params[:track_id],
+    user_id: request.cookies['user_id']
+  )
+  binding.pry
+  if @vote.save
+    redirect '/tracks'
+  else
+    "you already voted"
   end
 end
 

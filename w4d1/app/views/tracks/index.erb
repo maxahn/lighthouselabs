@@ -1,12 +1,23 @@
 <% @tracks.each do |track| %>
   <div class="track">
-    <h3><%= track.title %> <small>(by: <%= track.author %>)</small></h3>
+    <h3><a href="/tracks/<%= track.id %>"><%= track.title %></a> <small>(by: <%= track.author %>)</small></h3>
     <p>
       <%= track.url %>
     </p>    
     <p>
       Submitted by user: <%= User.find(track.user_id)[:username] %>
     </p>
+     <p>
+      Total Votes: <%= Vote.where(track_id: track.id).count %>
+    </p>
+
+    <form action="/votes" method="post">
+      <div>
+       <input type="hidden" name="track_id" value="<%= track.id %>">
+      <input type="submit" value="Vote">
+      </div>
+    </form>
+
   </div>
 <% end %>
 
