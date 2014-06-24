@@ -1,16 +1,16 @@
 # Homepage (Root path)
 helpers do
-  def admin? 
+  def logged_in? 
     request.cookies['login'] == 'true'
   end
 
   def protected!
-    if admin? != true
+    if logged_in? != true
       halt [ 401, 'Not Authorized' ]
-    else
-      return true
     end
   end
+
+  @login_error = false
 end
 
 get '/' do
@@ -30,7 +30,24 @@ get '/tracks' do
 end
 
 get '/login' do
-  erb :'login/login'
+  erb :'logins/index'
+end
+
+get '/signup' do
+  @user = User.new
+  erb :'logins/new'
+end
+
+post '/signup' do
+  @user = User.new(
+    username: params[:username],
+    password: params[:password]
+  )
+  if @user.save
+    redirect '/login'
+  else
+    erb :'logins/new'
+  end
 end
 
 get '/tracks/new' do
@@ -63,7 +80,6 @@ post '/votes' do
     track_id: params[:track_id],
     user_id: request.cookies['user_id']
   )
-  binding.pry
   if @vote.save
     redirect '/tracks'
   else
@@ -77,8 +93,10 @@ post '/login' do
     response.set_cookie('login',true)
     response.set_cookie('user_id', id)
     
+    @login_error = false
     redirect '/tracks'
   else
-    "Username or Password incorrect"
+    @login_error = true
+    erb :'logins/index'
   end
 end

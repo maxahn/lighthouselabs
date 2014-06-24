@@ -1,0 +1,27 @@
+<h1>Sign Up Account</h1>
+<hr/>
+
+<% if @user.errors.any? %>
+  <div>
+    <strong>Some issues with your account creation, please fix them:</strong>
+    <ul>
+      <% @user.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<form action="/signup" method="post">
+  <div>
+    <label>Username:</label>
+    <input type="text" name="username">
+  </div>
+  <div>
+    <label>Passowrd:</label>
+    <input type="text" name="password">
+  </div>
+  <div>
+    <input type="submit" value="Signup">
+  </div>
+</form>

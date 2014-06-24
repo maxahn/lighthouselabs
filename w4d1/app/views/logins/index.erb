@@ -1,3 +1,12 @@
+<h1>Log In Page</h1>
+<hr/>
+
+<% if @login_error %>
+  <div>
+    <strong>Wrong username or password</strong>
+  </div>
+<% end %>
+
 <form action="/login" method="post">
   <div>
     <label>Username:</label>
