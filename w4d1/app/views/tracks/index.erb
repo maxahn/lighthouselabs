@@ -3,7 +3,16 @@
     <h3><%= track.title %> <small>(by: <%= track.author %>)</small></h3>
     <p>
       <%= track.url %>
+    </p>    
+    <p>
+      Submitted by user: <%= User.find(track.user_id)[:username] %>
     </p>
   </div>
 <% end %>
+
+<a href="/tracks/new">Submit Music Tracks!</a>
+<br />
+<br />
+<br />
+<a href="/logout">Log Out</a>
 
