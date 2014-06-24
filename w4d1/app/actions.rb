@@ -101,8 +101,9 @@ post '/reviews' do
   end
 end
 
-post '/deletereview' do
-
+post '/deletereviews' do
+  Review.find(params[:review_id]).destroy
+  redirect "/tracks/#{params[:track_id]}"
 end
 
 

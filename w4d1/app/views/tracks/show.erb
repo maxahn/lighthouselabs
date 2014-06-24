@@ -20,9 +20,19 @@
   <div class="review">
     <p><%= review.review %> </p>
     <p>
-      Submitted by user: <%= User.find(review.user_id)[:username] %>
+      <small>Submitted by user: <%= User.find(review.user_id)[:username] %></small>
     </p>
   </div>
+
+  <% if review.user_id == request.cookies['user_id'].to_i %>
+  <form action="/deletereviews" method="post">
+    <div>
+      <input type="hidden" name="review_id" value="<%= review.id %>">
+      <input type="submit" value="Delete Review">
+    </div>
+  </form>
+  <% end %>
+
 <% end %>
 
 <form action="/reviews" method="post">
