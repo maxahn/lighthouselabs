@@ -1,0 +1,7 @@
+require_relative 'robot.rb'
+require_relative 'item.rb'
+require_relative 'weapon.rb'
+require_relative 'grenade.rb'
+require_relative 'laser.rb'
+require_relative 'box_of_bolts.rb'
+require_relative 'plasma_cannon.rb'
