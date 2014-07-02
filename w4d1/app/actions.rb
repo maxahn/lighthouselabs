@@ -24,7 +24,6 @@ get('/logout') do
 end
 
 get '/tracks' do
-  protected!
   @tracks = Track.all
   erb :'tracks/index'
 end

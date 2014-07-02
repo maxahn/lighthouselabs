@@ -3,6 +3,13 @@
 
 <h1>Home Page</h1>
 
+<a href="/tracks">View Tracks</a>
+<br />
+<% if logged_in? %>
+  <a href="/logout">Log Out</a>
+<% else %>
+  <a href="/login">Login Here</a>
+  <a href="/signup">Signup Here</a>
+<% end %>
 
-<a href="/login">Login Here</a>
-<a href="/signup">Signup Here</a>
+

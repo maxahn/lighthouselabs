@@ -10,13 +10,14 @@
      <p>
       Total Votes: <%= Vote.where(track_id: track.id).count %>
     </p>
-
-    <form action="/votes" method="post">
-      <div>
-       <input type="hidden" name="track_id" value="<%= track.id %>">
-      <input type="submit" value="Vote">
-      </div>
-    </form>
+    <% if logged_in? %>
+      <form action="/votes" method="post">
+        <div>
+         <input type="hidden" name="track_id" value="<%= track.id %>">
+        <input type="submit" value="Vote">
+        </div>
+      </form>
+    <% end %>
 
   </div>
 <% end %>
@@ -25,5 +26,8 @@
 <br />
 <br />
 <br />
-<a href="/logout">Log Out</a>
+<% if logged_in? %>
+  <a href="/logout">Log Out</a>
+<% end %>
 
+<a href="/">Home Page</a>

@@ -35,17 +35,22 @@
 
 <% end %>
 
-<form action="/reviews" method="post">
-  <div>
-    <textarea name="review" cols="25" rows="5">
-      Enter your review here...
-    </textarea>
-  </div>
-  <div>
-     <input type="hidden" name="track_id" value="<%= @track.id %>">
-    <input type="submit" value="Submit">
-  </div>
-</form>
+
+<% if logged_in? %>
+  <form action="/reviews" method="post">
+    <div>
+      <textarea name="review" cols="25" rows="5">
+        Enter your review here...
+      </textarea>
+    </div>
+    <div>
+       <input type="hidden" name="track_id" value="<%= @track.id %>">
+      <input type="submit" value="Submit">
+    </div>
+  </form>
+<% else %>
+  <p>Log in to submit reviews</p>
+<% end %>
 
 <hr/>
 <a href="/tracks">Back to All Tracks</a>
