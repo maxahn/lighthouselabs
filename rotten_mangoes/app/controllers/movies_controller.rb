@@ -2,6 +2,15 @@ class MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+    if params[:title].present?
+      @movies = @movies.search_by_title(params[:title])
+    end
+    if params[:director].present?
+      @movies = @movies.search_by_director(params[:director])
+    end
+    if params[:duration].present?
+      @movies = @movies.search_by_duration(params[:duration])
+    end
   end
 
   def show
@@ -42,6 +51,7 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
+
   protected
 
   def movie_params
@@ -49,5 +59,6 @@ class MoviesController < ApplicationController
       :title, :release_date, :director, :runtime_in_minutes, :poster_image_url, :description, :image, :remote_image_url
     )
   end
+
 
 end

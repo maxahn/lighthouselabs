@@ -47,4 +47,4 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem "rmagick", :require => 'RMagick'
 gem "carrierwave"
 gem 'kaminari'
-
+gem 'bootstrap-sass'

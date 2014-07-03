@@ -20,8 +20,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      session[:user_id] = @user.id
-      redirect_to movies_path, notice: "Welcome aboard, #{@user.firstname}!"
+      redirect_to admin_users_path, notice: "User successfully created!"
     else
       render :new
     end
@@ -31,7 +30,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update_attributes(user_params)
-      redirect_to admin_user_path(@user)
+      redirect_to admin_user_path(@user), notice: "User successfully updated!"
     else
       render :edit
     end
