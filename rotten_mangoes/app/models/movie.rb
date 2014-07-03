@@ -41,4 +41,26 @@ class Movie < ActiveRecord::Base
     end
   end
 
+  def self.search_by_title(title) 
+    self.where("movies.title LIKE ?", "%#{title}%")
+  end
+
+  def self.search_by_director(director) 
+    self.where("movies.director LIKE ?", "%#{director}%")
+  end
+
+  def self.search_by_duration(duration)
+    if duration == '0'
+      self.all
+    elsif duration == '1'
+      self.where("runtime_in_minutes <= 90")
+    elsif duration == '2'
+      self.where("runtime_in_minutes BETWEEN 90 AND 120")
+    elsif duration == '3'
+      self.where("runtime_in_minutes >= 120")
+    else
+      self.all
+    end
+  end
+
 end
