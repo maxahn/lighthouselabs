@@ -38,3 +38,16 @@ command: rake routes | grep profile
 note:
 helper_method (make method accessible to view files)  
 
+
+Scope:
+class Post < ActiveRecord::Base
+  scope :published,               -> { where(published: true) }
+  scope :published_and_commented, -> { published.where("comments_count > 0") }
+end
+
+class User
+  default_scope { where state: 'pending' } #regardless of what you are doing this scope is always active.
+  eg. User.all => User.all.where(state: 'pending')
+  You can do User.unscoped.load to undo scope.
+
+

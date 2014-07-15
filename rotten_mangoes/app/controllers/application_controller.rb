@@ -16,13 +16,17 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
+
   def admin?
-    if current_user && current_user.role == "admin"
+    account = User.find(session[:admin_id])
+    if current_user && account.role == "admin"
       return true
     else
-      return false
+      flash[:alert] = "You must be an admin."
+      redirect_to new_session_path
     end
   end
+
 
   helper_method :current_user
   helper_method :admin?  

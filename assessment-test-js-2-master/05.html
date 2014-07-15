@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <meta charset='utf-8'>
+        <link rel='shortcut icon' href='data:image/x-icon;,' type='image/x-icon'>
+        <link rel='stylesheet' href='_assets/style.css' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
+        <script src='http://code.jquery.com/jquery-1.10.2.min.js'></script>
+        <script src='_assets/assert.js'></script>
+        <title>Question #5</title>
+    </head>
+    <body>
+        <div id='container'>
+            <h1>Question #5 (20 points)</h1>
+            <div class="navigator">
+                <a class="back" href='04.html'>Question 4</a>
+                <div class="list">
+                    <a href='index.html'>List</a>
+                </div>
+                <a class="fwd" href='06.html'>Question 6</a>
+            </div>
+            <!-- ----------------------------------------- -->
+
+            <p>Write a function called <code>findZedWords</code> that takes in an array of words, and returns <strong>all the words that <em>start</em> with the letter Z</strong>.</p>
+            <p>Refresh the page to rerun the assertions (tests). With the correct solution in the dedicated area, the failing tests below should succeed.</p>
+            <p>Tip: Use the DevTools Console to test your function's return value manually.</p>
+            <p>Edit the page source to begin.</p>
+
+        </div>
+        <script>
+
+          /**** YOU MAY MODIFY THE CODE BELOW ****/
+          var wordswithzed = [];
+
+          function findZedWords(words) {
+            $.each(words, function( key, word ) {
+              if word
+              wordswithzed.push(word);
+            });
+            return wordswithzed;
+
+          }
+
+          /**** STOP MODIFYING HERE. ****/
+
+          $(document).ready(function() {
+
+            /*
+              NOTE:
+              The code below is for you and us to verify that your function is working correctly.
+              It's what makes the red/pink boxes on the page. The goal is to make them green by making the
+              assertion pass. Please do not modify the code below.
+            */
+
+            assertArraysEqual(findZedWords(['Zoons', 'Ceasar', 'Idefix']), ['Zoons']);
+            assertArraysEqual(findZedWords(['Pure', 'Zooey', 'Tazza', 'Zills']), ['Zooey', 'Zills']);
+            assertArraysEqual(findZedWords(['A', 'B', 'C']), []);
+
+          });
+
+        </script>
+    <body>
+</html>

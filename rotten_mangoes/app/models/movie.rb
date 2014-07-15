@@ -2,6 +2,8 @@ class Movie < ActiveRecord::Base
 
   has_many :reviews
 
+  scope :search_by_key, ->(key) { where("movies.title LIKE ? OR movies.director LIKE ?", "%#{key}%", "%#{key}%" ) }
+
   mount_uploader :image, ImageUploader
 
   validates :title,
@@ -41,13 +43,13 @@ class Movie < ActiveRecord::Base
     end
   end
 
-  def self.search_by_title(title) 
-    self.where("movies.title LIKE ?", "%#{title}%")
-  end
+  # def self.search_by_title(title) 
+  #   self.where("movies.title LIKE ?", "%#{title}%")
+  # end
 
-  def self.search_by_director(director) 
-    self.where("movies.director LIKE ?", "%#{director}%")
-  end
+  # def self.search_by_director(director) 
+  #   self.where("movies.director LIKE ?", "%#{director}%")
+  # end
 
   def self.search_by_duration(duration)
     if duration == '0'

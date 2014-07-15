@@ -1,4 +1,7 @@
 class Admin::UsersController < ApplicationController
+  
+  before_filter :admin?
+
   def index
     @users = User.order("firstname").page(params[:page]).per(2)
   end

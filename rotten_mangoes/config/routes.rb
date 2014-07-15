@@ -9,6 +9,7 @@ RottenMangoes::Application.routes.draw do
   end
   resources :users, only: [:new, :create]
   resource :session, only: [:new, :create, :destroy]
+  post "session/change" => "sessions#change", :as => "change_session"
   root to: 'movies#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

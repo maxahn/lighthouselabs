@@ -48,3 +48,4 @@ gem "rmagick", :require => 'RMagick'
 gem "carrierwave"
 gem 'kaminari'
 gem 'bootstrap-sass'
+gem 'byebug'

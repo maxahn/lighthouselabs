@@ -21,6 +21,9 @@ def recursive_bottles(money, new_bottles, full_bottles_from_empty, full_bottles_
 
 end
 
+
+
+
 #Below is non recursive method, its broken due to changed variables for recursive method above, for reference only
 # def total_bottles(money)
 #   total_bottles = money / 2

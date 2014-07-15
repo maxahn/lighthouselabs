@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+
+
+
+<script type="text/javascript">
+var cash = 100;
+
+function changeText(){
+  $('#boldStuff').text(cash);
+}
+
+function changeText2(answer){
+  $('#boldStuff2').text("Dice rolled to: " + answer);
+}
+
+function ChangeFormText(cash){
+  $('#formtext').text("You only have $" + cash + " left. Bet all?");
+}
+
+function CheckCash(cash, amount){
+  if (cash < amount){
+    return false;
+  }
+}
+
+function bet(amount, guess){
+    event.preventDefault();
+    
+    var answer = Math.floor((Math.random() * 10) + 1);
+    changeText2(answer);
+    var amount = parseInt(document.gameform.amount.value);
+    var guess = parseInt(document.gameform.guess.value);
+    if (!CheckCash(cash, amount)){
+      alert("Not enough cash");
+      return;
+    }
+    if (answer === guess){
+      cash += amount;
+      document.getElementById('gameresult').innerHTML = "You win, you now have: $" + cash;
+    } else if (answer != guess + 1 && answer != guess - 1) {
+      cash -= amount;
+      document.getElementById('gameresult').innerHTML = "You lose, you now have: $" + cash;
+    } else {
+      document.getElementById('gameresult').innerHTML = "Bet again, you still have: $" + cash;
+    }
+  if (cash < 5){
+    document.getElementById('amount').value=cash
+    ChangeFormText(cash);
+  }
+}
+
+// while (cash > 0){
+//   if (cash < 5){
+//     var amount = prompt("You have $" + cash + " left, bet all?", cash)
+//   } else{
+//     var amount = prompt("Bet $5 to $10")
+//   }
+//   var guess = prompt("Guess a number between 1 and 10")
+//   alert(bet(amount, guess))
+// }
+</script>
+
+<form name="gameform" action="" onsubmit="return bet()">
+How much to bet: <span id='formtext'>(bet an amount between $5 to $10)</span> <input type="text" id='amount' name="amount"><br>
+What's your guess(pick a number from 1 to 10): <input type="text" name="guess"><br />
+<INPUT type="submit" value="Bet">
+</form>
+<p>The result is: <b id='gameresult'></b></p>
+
+
+<p>Current Cash On Hand: <b id='boldStuff'></b> </p> 
+<input type='button' onclick='changeText()' value='Check Current Cash'/>
+
+<p>----------------------------------------------------</p>
+<p><b id='boldStuff2'></b> </p> 
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</body>
+</html>
